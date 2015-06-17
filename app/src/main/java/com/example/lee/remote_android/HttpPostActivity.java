@@ -26,32 +26,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class HttpPostActivity extends Activity {
+public class HttpPostActivity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        final TextView textviewDatiRicevuti = (TextView) findViewById(R.id.datiRicevuti);
-        Button buttonInviaDati = (Button) findViewById(R.id.buttonInviaDati);
-        buttonInviaDati.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                //invio richiesta
-                textviewDatiRicevuti.setText(inviaDati());
-            }
-        });
-    }
 
-    public String inviaDati() {
+    public  static String inviaDati() {
+
         String result = "";
         String stringaFinale = "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
+
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://10.1.1.1:3306/miosito/connectDb.php");
+            HttpPost httppost = new HttpPost("http://premierbet365.com");
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -73,6 +62,8 @@ public class HttpPostActivity extends Activity {
             } catch (Exception e) {
                 Log.e("TEST", "Errore nel convertire il risultato " + e.toString());
             }
+
+
             //parsing dei dati arrivati in formato json
             try {
                 JSONArray jArray = new JSONArray(result);
