@@ -29,6 +29,10 @@ import java.util.ArrayList;
 
 public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
+    public HttpPostActivity(String s1, String s2){
+
+    }
+
    public String output = "wtf";
 
 
