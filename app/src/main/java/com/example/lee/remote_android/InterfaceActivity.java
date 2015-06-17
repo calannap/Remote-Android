@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class InterfaceActivity extends ActionBarActivity {
 
- 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
