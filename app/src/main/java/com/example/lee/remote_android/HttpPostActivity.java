@@ -29,23 +29,24 @@ import java.util.ArrayList;
 
 public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
-    private String usr="";
-    private String pss="";
+    public String usr="";
+    public String pss="";
 
     public HttpPostActivity(String s1, String s2){
         usr=s1;
         pss=s2;
     }
 
-   public int output;
+   public String output="";
 
 
-    public int getStringa(){
+    public String getStringa(){
         return output;
     }
+
     @Override
     protected String doInBackground(String... params) {
-            output = Integer.parseInt(inviaDati());
+            output = inviaDati();
         return null;
     }
 
@@ -59,7 +60,7 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"& pass="+pss);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();

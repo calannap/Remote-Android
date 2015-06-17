@@ -41,12 +41,12 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
-                    int match=0;
+                    String match="";
                     HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
                     connection.execute();
-                    connection.getStringa();
+                    match = connection.getStringa();
 
-                    if(match == 1) {
+                    if(match.charAt(8)==('1')) {
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
                     }
