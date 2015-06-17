@@ -27,15 +27,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class HttpPostActivity extends AsyncTask {
+public class HttpPostActivity extends AsyncTask<String, Void, String>  {
+
+   public String stringaFinale = "";
 
 
-
+    public String getStringa(){
+        return stringaFinale;
+    }
     @Override
-    protected String doInBackground(Object[] params) {
+    protected String doInBackground(String... params) {
+            return inviaDati();
+    }
 
+    protected String inviaDati() {
         String result = "";
-        String stringaFinale = "";
+
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
@@ -70,7 +77,7 @@ public class HttpPostActivity extends AsyncTask {
             //parsing dei dati arrivati in formato json
             try {
                 JSONArray jArray = new JSONArray(result);
-                for (int i = 0; i < jArray.length();i++){
+                for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Log.i("TEST", "id: " + json_data.getInt("id") +
                                     ", cognome: " + json_data.getString("cognome") +
