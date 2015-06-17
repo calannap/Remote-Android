@@ -40,7 +40,7 @@ public class HttpPostActivity {
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://premierbet365.com");
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php");
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
