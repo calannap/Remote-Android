@@ -20,6 +20,7 @@ public class InterfaceActivity extends ActionBarActivity {
         HttpPostActivity connection = new HttpPostActivity();
         connection.execute();
 
+
         t1.setText(connection.getStringa());
 
     }
