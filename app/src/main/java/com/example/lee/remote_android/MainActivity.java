@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,9 +48,12 @@ public class MainActivity extends ActionBarActivity {
                     connection.execute();
                     match = connection.getStringa();
 
-                    for (int i=0; i<match.length();i++)
-                        if (match.charAt(i)=='1')
-                            verifica=true;
+
+
+
+                        if (match.equals("valore: 1")) {
+                            verifica = true;
+                        }
 
                     if(verifica) {
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
