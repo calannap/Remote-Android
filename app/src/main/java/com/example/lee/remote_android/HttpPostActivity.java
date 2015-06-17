@@ -29,21 +29,21 @@ import java.util.ArrayList;
 
 public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
-   public String stringaFinale = "";
+   public String output = "wtf";
 
 
     public String getStringa(){
-        return stringaFinale;
+        return output;
     }
     @Override
     protected String doInBackground(String... params) {
-            stringaFinale= inviaDati();
+            output = inviaDati();
         return null;
     }
 
     protected String inviaDati() {
         String result = "";
-        String output= "";
+        String stringaFinale= "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
@@ -92,6 +92,6 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
             }
         } else {  //is è null e non ho avuto risposta
         }
-        return output;
+        return stringaFinale;
     }
 }
