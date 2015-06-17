@@ -17,10 +17,10 @@ public class InterfaceActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
         TextView t1 = (TextView) findViewById(R.id.txtprova);
-        HttpPostActivity connection = new HttpPostActivity();
-        connection.execute();
-        String dati =
-                t1.setText(dati);
+
+
+
+
 
     }
 

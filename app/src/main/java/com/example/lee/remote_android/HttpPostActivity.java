@@ -29,15 +29,23 @@ import java.util.ArrayList;
 
 public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
-   public String output = "wtf";
+    private String usr="";
+    private String pss="";
+
+    public HttpPostActivity(String s1, String s2){
+        usr=s1;
+        pss=s2;
+    }
+
+   public int output;
 
 
-    public String getStringa(){
+    public int getStringa(){
         return output;
     }
     @Override
     protected String doInBackground(String... params) {
-            output = inviaDati();
+            output = Integer.parseInt(inviaDati());
         return null;
     }
 
