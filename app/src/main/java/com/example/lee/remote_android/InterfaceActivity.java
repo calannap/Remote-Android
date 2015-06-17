@@ -18,7 +18,7 @@ public class InterfaceActivity extends ActionBarActivity {
         setContentView(R.layout.activity_interface);
         TextView t1 = (TextView) findViewById(R.id.txtprova);
         HttpPostActivity connection = new HttpPostActivity();
-        String dati = connection.inviaDati();
+        String dati = connection.execute("ciao");
         t1.setText(dati);
 
     }

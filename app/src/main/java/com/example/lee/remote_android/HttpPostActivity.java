@@ -1,6 +1,7 @@
 package com.example.lee.remote_android;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +27,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class HttpPostActivity {
+public class HttpPostActivity extends AsyncTask {
 
 
-    public  static String inviaDati() {
+
+    @Override
+    protected String doInBackground(Object[] params) {
 
         String result = "";
         String stringaFinale = "";
