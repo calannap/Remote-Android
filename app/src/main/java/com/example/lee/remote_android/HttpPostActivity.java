@@ -37,12 +37,13 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
     }
     @Override
     protected String doInBackground(String... params) {
-            return inviaDati();
+            stringaFinale= inviaDati();
+        return null;
     }
 
     protected String inviaDati() {
         String result = "";
-
+        String output= "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
@@ -91,6 +92,6 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
             }
         } else {  //is è null e non ho avuto risposta
         }
-        return stringaFinale;
+        return output;
     }
 }
