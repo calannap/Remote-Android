@@ -80,10 +80,11 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Log.i("TEST", "id: " + json_data.getInt("id") +
-                                    ", cognome: " + json_data.getString("cognome") +
-                                    ", nascita: " + json_data.getInt("anno")
+                                    ", user: " + json_data.getString("user") +
+                                    ", pass: " + json_data.getString("pass") +
+                                    ", email: " + json_data.getString("email")
                     );
-                    stringaFinale = json_data.getInt("id") + " " + json_data.getString("cognome") + " " + json_data.getInt("anno") + "\n\n";
+                    stringaFinale = json_data.getInt("id") + " " + json_data.getString("user") + " " + json_data.getString("pass")+ " " + json_data.getString("email") + "\n\n";
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());
