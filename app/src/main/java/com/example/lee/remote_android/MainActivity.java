@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    boolean verifica=false;
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
                     String match="";
@@ -46,7 +47,11 @@ public class MainActivity extends ActionBarActivity {
                     connection.execute();
                     match = connection.getStringa();
 
-                    if(match.charAt(8)==('1')) {
+                    for (int i=0; i<match.length();i++)
+                        if (match.charAt(i)=='1')
+                            verifica=true;
+
+                    if(verifica) {
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
                     }
