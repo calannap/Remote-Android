@@ -46,12 +46,13 @@ public class MainActivity extends ActionBarActivity {
                     String match="";
                     HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
                     connection.execute();
-                    match = connection.getStringa();
 
+                    do {
+                        match = connection.getStringa();
+                    }while(match=="");
 
-
-
-                        if (match.equals("valore: 1")) {
+                    Log.i("CULO",match);
+                        if (match.equals(" 1")) {
                             verifica = true;
                         }
 
