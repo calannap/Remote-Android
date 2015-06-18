@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
                     String match="";
-                    HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
+                    HttpLogin connection = new HttpLogin(user.getText().toString(), password.getText().toString());
                     connection.execute();
                     while(connection.finish()){
                         try {
