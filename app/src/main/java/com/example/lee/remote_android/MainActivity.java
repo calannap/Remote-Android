@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
                     String match="";
                     HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
                     connection.execute();
-                    while(!connection.finish){
+                    while(connection.finish()){
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {

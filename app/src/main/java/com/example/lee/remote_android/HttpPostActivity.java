@@ -31,6 +31,7 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
+    public boolean finito=true;
 
     public HttpPostActivity(String s1, String s2){
         usr=s1;
@@ -44,9 +45,13 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
         return output;
     }
 
+    public boolean finish(){
+        return finito;
+    }
     @Override
     protected String doInBackground(String... params) {
             output = inviaDati();
+        finito=false;
         return null;
     }
 
