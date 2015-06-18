@@ -34,6 +34,8 @@ public class RegisterActivity extends ActionBarActivity {
                 password = (TextView) findViewById(R.id.editpass);
                 email = (TextView) findViewById(R.id.editemail);
 
+                HttpRegister connection = new HttpRegister(user.getText().toString(), password.getText().toString(),email.getText().toString());
+                connection.execute();
 
             }
         });

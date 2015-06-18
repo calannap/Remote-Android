@@ -24,11 +24,12 @@ public class HttpRegister extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
+    public String eml="";
     public boolean finito=true;
 
-    public HttpRegister(String s1, String s2){
+    public HttpRegister(String s1, String s2, String s3){
         usr=s1;
-        pss=s2;
+        eml=s2;
     }
 
    public String output="";
