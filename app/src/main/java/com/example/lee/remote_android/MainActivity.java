@@ -39,6 +39,14 @@ public class MainActivity extends ActionBarActivity {
             login = (Button) findViewById(R.id.button);
             register = (Button) findViewById(R.id.button2);
 
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intreg = new Intent("com.example.lee.remote_android.RegisterActivity");
+                    startActivity(intreg);
+                }
+            });
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
