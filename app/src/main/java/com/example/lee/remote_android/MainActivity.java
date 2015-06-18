@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -46,12 +48,19 @@ public class MainActivity extends ActionBarActivity {
                     String match="";
                     HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
                     connection.execute();
+                    while(!connection.finish){
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                    }
                     match = connection.getStringa();
 
+                    Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match);
 
 
-
-                        if (match.equals("valore: 1")) {
+                        if (match.equals("1")) {
                             verifica = true;
                         }
 
