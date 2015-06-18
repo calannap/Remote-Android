@@ -27,13 +27,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class HttpPostActivity extends AsyncTask<String, Void, String>  {
+public class HttpLogin extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
     public boolean finito=true;
 
-    public HttpPostActivity(String s1, String s2){
+    public HttpLogin(String s1, String s2){
         usr=s1;
         pss=s2;
     }
