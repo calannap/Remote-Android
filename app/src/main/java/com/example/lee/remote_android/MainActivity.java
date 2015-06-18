@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -46,13 +48,12 @@ public class MainActivity extends ActionBarActivity {
                     String match="";
                     HttpPostActivity connection = new HttpPostActivity(user.getText().toString(), password.getText().toString());
                     connection.execute();
+                    match = connection.getStringa();
 
-                    do {
-                        match = connection.getStringa();
-                    }while(match=="");
 
-                    Log.i("CULO",match);
-                        if (match.equals(" 1")) {
+
+
+                        if (match.equals("valore: 1")) {
                             verifica = true;
                         }
 

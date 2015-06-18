@@ -46,11 +46,9 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
 
     @Override
     protected String doInBackground(String... params) {
-          output = inviaDati();
+            output = inviaDati();
         return null;
     }
-
-
 
     protected String inviaDati() {
         String result = "";
@@ -96,7 +94,7 @@ public class HttpPostActivity extends AsyncTask<String, Void, String>  {
                                   //  ", pass: " + json_data.getString("pass") +
                                    // ", email: " + json_data.getString("email")
                     );
-                    stringaFinale = json_data.getString("valore")+ "\n\n";
+                    stringaFinale = json_data.getInt("valore")+ "\n\n";
                     // + " " + json_data.getString("user") + " " + json_data.getString("pass")+ " " + json_data.getString("email") + "\n\n";
                 }
             } catch (JSONException e) {
