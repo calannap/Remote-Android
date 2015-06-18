@@ -1,12 +1,16 @@
 package com.example.lee.remote_android;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class RegisterActivity extends ActionBarActivity {
@@ -33,10 +37,41 @@ public class RegisterActivity extends ActionBarActivity {
                 user = (TextView) findViewById(R.id.edituser);
                 password = (TextView) findViewById(R.id.editpass);
                 email = (TextView) findViewById(R.id.editemail);
-
+                String match="";
                 HttpRegister connection = new HttpRegister(user.getText().toString(), password.getText().toString(),email.getText().toString());
                 connection.execute();
 
+                while(connection.finish()){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+
+                    }
+                }
+                match = connection.getStringa();
+
+                    Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match.equals("1"));
+
+
+
+
+                if(match.equals("1")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Account creato";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "Username gia' esistente!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                }
             }
         });
 
