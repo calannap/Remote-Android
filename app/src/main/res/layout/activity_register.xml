@@ -35,16 +35,6 @@
         android:layout_below="@+id/edituser"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editpass"
-        android:layout_below="@+id/txtpass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/edituser"
-        android:layout_alignEnd="@+id/edituser" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,8 +51,8 @@
         android:layout_below="@+id/txtmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editpass"
-        android:layout_alignEnd="@+id/editpass" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,5 +63,17 @@
         android:layout_below="@+id/editemail"
         android:layout_alignLeft="@+id/txtpass"
         android:layout_alignStart="@+id/txtpass" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editpass"
+        android:layout_below="@+id/txtpass"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
