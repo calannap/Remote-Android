@@ -29,7 +29,8 @@ public class HttpRegister extends AsyncTask<String, Void, String>  {
 
     public HttpRegister(String s1, String s2, String s3){
         usr=s1;
-        eml=s2;
+        pss=s2;
+        eml=s3;
     }
 
    public String output="";

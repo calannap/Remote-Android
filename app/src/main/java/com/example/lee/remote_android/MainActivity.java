@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                     match = connection.getStringa();
 
-                    Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match.equals("1"));
+                //    Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match.equals("1"));
 
 
                         if (match.equals("1")) {
