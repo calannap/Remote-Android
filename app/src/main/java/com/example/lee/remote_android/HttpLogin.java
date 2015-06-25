@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class HttpLogin extends AsyncTask<String, Void, String>  {
 
-    private static HttpLogin istanza = null;
+    private static HttpLogin istanza = new HttpLogin();
     public static String usr="";
     public static String pss="";
     public boolean finito=true;
@@ -53,8 +53,6 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     }
 
     public static HttpLogin getLogin(){
-        if ( istanza == null)
-            istanza = new HttpLogin();
 
         return istanza;
     }
