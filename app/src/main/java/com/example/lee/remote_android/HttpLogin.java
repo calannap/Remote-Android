@@ -50,7 +50,7 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     }
     @Override
     protected String doInBackground(String... params) {
-            output = inviaDati();
+        output = inviaDati();
         finito=false;
         return null;
     }
@@ -61,13 +61,13 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
-
+        String ip = Utils.getIPAddress(true);
         String device = Devices.getDeviceName();
 
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
