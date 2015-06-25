@@ -90,12 +90,12 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                 JSONArray jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("TEST", "id: " + json_data.getInt("id") +
-                             ", user: " + json_data.getString("user") +
+                    Log.i("TESTONE", "id: " + json_data.getInt("id") +
+                             ", idutenti: " + json_data.getString("idutenti") +
                              ", ip: " + json_data.getString("ip") +
                              ", nome: " + json_data.getString("nome")
                     );
-                    stringaFinale = json_data.getString("valore")  + " " + json_data.getString("user") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n";
+                    stringaFinale = json_data.getString("id")  + " " + json_data.getString("idutenti") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n";
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());

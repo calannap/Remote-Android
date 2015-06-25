@@ -30,6 +30,14 @@ public class InterfaceActivity extends ActionBarActivity {
 
         HttpLogin connection = HttpLogin.getLogin();
         HttpDevices elenco = new HttpDevices(connection.getUser(),connection.getPsw());
+        elenco.inviaDati();
+        while(elenco.finish()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
+        }
         String match = elenco.getStringa();
         Log.i("STRINGHE: ", match);
 
