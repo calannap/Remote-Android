@@ -2,6 +2,7 @@ package com.example.lee.remote_android;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,10 @@ public class InterfaceActivity extends ActionBarActivity {
             }
         });*/
 
+        HttpLogin connection = HttpLogin.getLogin();
+        HttpDevices elenco = new HttpDevices(connection.getUser(),connection.getPsw());
+        String match = elenco.getStringa();
+        Log.i("STRINGHE: ", match);
 
 
     }

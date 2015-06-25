@@ -1,14 +1,10 @@
 package com.example.lee.remote_android;
 
-import android.app.Activity;
+/**
+ * Created by Lee on 25/06/2015.
+ */
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.lee.remote_android.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,41 +21,20 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class HttpLogin extends AsyncTask<String, Void, String>  {
+public class HttpDevices extends AsyncTask<String, Void, String>  {
 
-    private static HttpLogin istanza = null;
-    public static String usr="";
-    public static String pss="";
+    public String usr="";
+    public String pss="";
     public boolean finito=true;
 
-    private HttpLogin(){
-
-    }
-
-    public void setUserPsw(String s1,String s2){
+    public HttpDevices(String s1, String s2){
         usr=s1;
         pss=s2;
     }
 
-    public String getUser(){
-        return usr;
-    }
-
-    public String getPsw(){
-        return pss;
-    }
-
-    public static HttpLogin getLogin(){
-        if ( istanza == null)
-            istanza = new HttpLogin();
-
-        return istanza;
-    }
-
-   public String output="";
+    public String output="";
 
 
     public String getStringa(){
@@ -82,20 +57,11 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
-        String ip = Utils.getIPAddress(true);
-        String device = Devices.getDeviceName();
 
         //http post
         try {
-
-            device = device.replace(' ','+');
-            String encoded = URLEncoder.encode("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip, "UTF-8");
-
-
-
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip);
-
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -124,18 +90,17 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
                 JSONArray jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("TEST", "valore: " + json_data.getInt("valore")
-                                   // ", user: " + json_data.getString("user") +
-                                  //  ", pass: " + json_data.getString("pass") +
-                                   // ", email: " + json_data.getString("email")
+                    Log.i("TEST", "id: " + json_data.getInt("id") +
+                             ", user: " + json_data.getString("user") +
+                             ", ip: " + json_data.getString("ip") +
+                             ", nome: " + json_data.getString("nome")
                     );
-                    stringaFinale = json_data.getString("valore");
-                    // + " " + json_data.getString("user") + " " + json_data.getString("pass")+ " " + json_data.getString("email") + "\n\n";
+                    stringaFinale = json_data.getString("valore")  + " " + json_data.getString("user") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n";
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());
             }
-        } else {  //is Ã¨ null e non ho avuto risposta
+        } else {  //is è null e non ho avuto risposta
         }
         return stringaFinale;
     }

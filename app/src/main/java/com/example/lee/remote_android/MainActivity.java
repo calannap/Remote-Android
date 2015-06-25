@@ -53,7 +53,8 @@ public class MainActivity extends ActionBarActivity {
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
                     String match="";
-                    HttpLogin connection = new HttpLogin(user.getText().toString(), password.getText().toString());
+                    HttpLogin connection = HttpLogin.getLogin();
+                    connection.setUserPsw(user.getText().toString(), password.getText().toString());
                     connection.execute();
                     while(connection.finish()){
                         try {
@@ -64,12 +65,12 @@ public class MainActivity extends ActionBarActivity {
                     }
                     match = connection.getStringa();
 
-                   Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match.equals("1"));
 
 
 
 
                     if(match.equals("1")) {
+
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
                     }

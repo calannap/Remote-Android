@@ -50,7 +50,6 @@ public class RegisterActivity extends ActionBarActivity {
                 }
                 match = connection.getStringa();
 
-                    Log.i("STAMPAAAA", "ECCOOOOOOOOOOOOO     : " + match.equals("1"));
 
 
 
