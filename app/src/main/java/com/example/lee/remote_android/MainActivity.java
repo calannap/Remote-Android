@@ -72,6 +72,7 @@ public class MainActivity extends ActionBarActivity {
 
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
+                        finish();
                     }
                     else{
                         Context context = getApplicationContext();

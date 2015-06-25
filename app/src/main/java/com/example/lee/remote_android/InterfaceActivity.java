@@ -61,8 +61,52 @@ public class InterfaceActivity extends ActionBarActivity {
         String device = Devices.getDeviceName();
         HttpLogout out = new HttpLogout(ip,device);
         out.execute();
+        while(out.finish()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
 
+            }
+        }
     }
+
+    @Override
+    public void onStop()
+    {
+        Log.i("WEE2222A", "STO CANCELLANDOOO");
+        String ip = Utils.getIPAddress(true);
+        String device = Devices.getDeviceName();
+        HttpLogout out = new HttpLogout(ip,device);
+        out.execute();
+        while(out.finish()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onPause()
+    {
+        Log.i("WE3333A", "STO CANCELLANDOOO");
+        String ip = Utils.getIPAddress(true);
+        String device = Devices.getDeviceName();
+        HttpLogout out = new HttpLogout(ip,device);
+        out.execute();
+        while(out.finish()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
