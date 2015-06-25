@@ -22,7 +22,6 @@ public class InterfaceActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
-        //TextView t1 = (TextView) findViewById(R.id.txtprova);
         ListView v1 = (ListView) findViewById(R.id.listDevices);
       /*  v1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,11 +41,24 @@ public class InterfaceActivity extends ActionBarActivity {
             }
         }
         List<String> match = elenco.getStringa();
+
+
+        for (int i=0;i<match.size();i++) {
+            match.set(i,match.get(i).substring(4, match.get(i).length()));
+        }
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 match );
         v1.setAdapter(arrayAdapter);
+
+        String ip = Utils.getIPAddress(true);
+        String device = Devices.getDeviceName();
+        device = device.replace(' ','+');
+        Log.i("WTF???????",ip);
+        HttpLogout out = new HttpLogout(ip,device);
+        out.execute();
 
 
     }
@@ -55,10 +67,12 @@ public class InterfaceActivity extends ActionBarActivity {
     @Override
     public void onPause()
     {
-        Log.i("WE3333A", "STO CANCELLANDOOO");
+
+
         String ip = Utils.getIPAddress(true);
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
+        Log.i("WTF???????",ip+" "+device);
         HttpLogout out = new HttpLogout(ip,device);
         out.execute();
         while(out.finish()){
