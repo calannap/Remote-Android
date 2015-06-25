@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -16,9 +18,14 @@ public class InterfaceActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
-        TextView t1 = (TextView) findViewById(R.id.txtprova);
-
-
+        //TextView t1 = (TextView) findViewById(R.id.txtprova);
+       /* ListView v1 = (ListView) findViewById(R.id.listDevices);
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selected = v1.getSelectedItemPosition();
+            }
+        });*/
 
 
 
