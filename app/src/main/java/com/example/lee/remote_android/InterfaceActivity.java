@@ -6,10 +6,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 public class InterfaceActivity extends ActionBarActivity {
@@ -20,8 +23,8 @@ public class InterfaceActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
         //TextView t1 = (TextView) findViewById(R.id.txtprova);
-       /* ListView v1 = (ListView) findViewById(R.id.listDevices);
-        v1.setOnClickListener(new View.OnClickListener() {
+        ListView v1 = (ListView) findViewById(R.id.listDevices);
+      /*  v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int selected = v1.getSelectedItemPosition();
@@ -38,12 +41,28 @@ public class InterfaceActivity extends ActionBarActivity {
 
             }
         }
-        String match = elenco.getStringa();
-        Log.i("STRINGHE: ", match);
+        List<String> match = elenco.getStringa();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                match );
+        v1.setAdapter(arrayAdapter);
 
 
     }
 
+
+
+    @Override
+    public void onDestroy()
+    {
+        Log.i("WEEELAAA", "STO CANCELLANDOOO");
+        String ip = Utils.getIPAddress(true);
+        String device = Devices.getDeviceName();
+        HttpLogout out = new HttpLogout(ip,device);
+        out.execute();
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

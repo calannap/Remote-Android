@@ -28,14 +28,13 @@ public class MainActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         onClickListener();
-
-
     }
 
-        public void onClickListener() {
+
+
+
+    public void onClickListener() {
             login = (Button) findViewById(R.id.button);
             register = (Button) findViewById(R.id.button2);
 

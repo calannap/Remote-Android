@@ -1,8 +1,4 @@
 package com.example.lee.remote_android;
-
-/**
- * Created by Lee on 25/06/2015.
- */
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -22,26 +18,22 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
-public class HttpDevices extends AsyncTask<String, Void, String>  {
+public class HttpLogout extends AsyncTask<String, Void, String>  {
 
-    public String usr="";
-    public String pss="";
+    public String ip="";
+    public String dev="";
     public boolean finito=true;
 
-    public HttpDevices(String s1, String s2){
-        usr=s1;
-        pss=s2;
+    public HttpLogout(String s1, String s2){
+        ip=s1;
+        dev=s2;
     }
 
+    public String output="";
 
 
-
-    public List<String> output = new ArrayList<String>();
-
-
-    public List<String> getStringa(){
+    public String getStringa(){
         return output;
     }
 
@@ -55,9 +47,9 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
         return null;
     }
 
-    protected List<String> inviaDati() {
+    protected String inviaDati() {
         String result = "";
-        List<String> stringaFinale= new ArrayList<String>();
+        String stringaFinale= "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
@@ -65,7 +57,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/logout.php?ip="+ip+"&device="+dev);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -94,13 +86,13 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                 JSONArray jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("TESTONE", "id: " + json_data.getInt("id") +
-                                    ", id_utenti: " + json_data.getString("id_utenti") +
-                             ", ip: " + json_data.getString("ip") +
-                             ", nome: " + json_data.getString("nome")
+                    Log.i("TEST", "valore: " + json_data.getInt("valore")
+                            // ", user: " + json_data.getString("user") +
+                            //  ", pass: " + json_data.getString("pass") +
+                            // ", email: " + json_data.getString("email")
                     );
-
-                    stringaFinale.add(json_data.getString("id")  + " " + json_data.getString("id_utenti") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n");
+                    stringaFinale = json_data.getString("valore");
+                    // + " " + json_data.getString("user") + " " + json_data.getString("pass")+ " " + json_data.getString("email") + "\n\n";
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());

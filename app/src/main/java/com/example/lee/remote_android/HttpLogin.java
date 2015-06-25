@@ -87,10 +87,6 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         try {
 
             device = device.replace(' ','+');
-            String encoded = URLEncoder.encode("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip, "UTF-8");
-
-
-
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip);
 
