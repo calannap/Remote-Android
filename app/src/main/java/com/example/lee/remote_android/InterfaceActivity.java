@@ -52,49 +52,13 @@ public class InterfaceActivity extends ActionBarActivity {
     }
 
 
-
-    @Override
-    public void onDestroy()
-    {
-        Log.i("WEEELAAA", "STO CANCELLANDOOO");
-        String ip = Utils.getIPAddress(true);
-        String device = Devices.getDeviceName();
-        HttpLogout out = new HttpLogout(ip,device);
-        out.execute();
-        while(out.finish()){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-
-            }
-        }
-    }
-
-    @Override
-    public void onStop()
-    {
-        Log.i("WEE2222A", "STO CANCELLANDOOO");
-        String ip = Utils.getIPAddress(true);
-        String device = Devices.getDeviceName();
-        HttpLogout out = new HttpLogout(ip,device);
-        out.execute();
-        while(out.finish()){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-
-            }
-        }
-    }
-
-
-
     @Override
     public void onPause()
     {
         Log.i("WE3333A", "STO CANCELLANDOOO");
         String ip = Utils.getIPAddress(true);
         String device = Devices.getDeviceName();
+        device = device.replace(' ','+');
         HttpLogout out = new HttpLogout(ip,device);
         out.execute();
         while(out.finish()){
