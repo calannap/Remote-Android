@@ -53,12 +53,8 @@ public class InterfaceActivity extends ActionBarActivity {
                 match );
         v1.setAdapter(arrayAdapter);
 
-        String ip = Utils.getIPAddress(true);
-        String device = Devices.getDeviceName();
-        device = device.replace(' ','+');
-        Log.i("WTF???????",ip);
-        HttpLogout out = new HttpLogout(ip,device);
-        out.execute();
+
+
 
 
     }
@@ -69,11 +65,9 @@ public class InterfaceActivity extends ActionBarActivity {
     {
 
 
-        String ip = Utils.getIPAddress(true);
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
-        Log.i("WTF???????",ip+" "+device);
-        HttpLogout out = new HttpLogout(ip,device);
+        HttpLogout out = new HttpLogout(HttpLogin.getLogin().getIP(),device);
         out.execute();
         while(out.finish()){
             try {

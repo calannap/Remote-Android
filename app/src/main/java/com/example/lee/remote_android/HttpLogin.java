@@ -33,6 +33,7 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     private static HttpLogin istanza = new HttpLogin();
     public static String usr="";
     public static String pss="";
+    public static String ip="";
     public boolean finito=true;
 
     private HttpLogin(){
@@ -51,6 +52,8 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     public String getPsw(){
         return pss;
     }
+
+    public String getIP() {return ip;}
 
     public static HttpLogin getLogin(){
 
@@ -80,7 +83,7 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
-        String ip = Utils.getIPAddress(true);
+        ip = Utils.getIPAddress(true);
         String device = Devices.getDeviceName();
 
         //http post
