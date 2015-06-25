@@ -62,6 +62,8 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
 
+        String device = Devices.getDeviceName();
+
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
