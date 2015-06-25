@@ -29,9 +29,8 @@ public class InterfaceActivity extends ActionBarActivity {
         });*/
 
 
-
         HttpDevices elenco = new HttpDevices(HttpLogin.getLogin().getUser(),HttpLogin.getLogin().getPsw());
-        elenco.inviaDati();
+        elenco.execute();
         while(elenco.finish()){
             try {
                 Thread.sleep(1000);
