@@ -35,17 +35,35 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
                Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
 
                String selectedFromList = (v1.getItemAtPosition(position).toString());
-               intlog.putExtra("Device",selectedFromList);
+               intlog.putExtra("Device", selectedFromList);
 
                startActivity(intlog);
 
            }
        });
 
-
         setValues(v1);
-     //   Thread thread = new Thread(this);
-      //  thread.start();
+       Thread thread = new Thread(new Runnable() {
+           @Override
+           public void run() {
+               while(true) {
+
+                   try {
+                       mHandler.post(new Runnable() {
+                           @Override
+                           public void run() {
+                               setValues(v1);
+                           }
+                       });
+                       Thread.sleep(3000);
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   }
+               }
+               }
+       });
+
+        thread.start();
     }
 
     public void setValues(ListView contenitore) {
