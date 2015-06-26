@@ -34,15 +34,18 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
 
-               String selectedFromList =(v1.getItemAtPosition(position).toString());
+               String selectedFromList = (v1.getItemAtPosition(position).toString());
                intlog.putExtra("Device",selectedFromList);
 
                startActivity(intlog);
+
            }
        });
 
 
         setValues(v1);
+     //   Thread thread = new Thread(this);
+      //  thread.start();
     }
 
     public void setValues(ListView contenitore) {
@@ -73,6 +76,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     @Override
    public void run() {
+
+
         while(true){
                     mHandler.post(new Runnable() {
                         @Override
