@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,6 +54,7 @@ public class InfoActivity extends ActionBarActivity
 
         Bundle extras = getIntent().getExtras();
         dev = extras.getString("Device");
+        Log.i("TITOLOOOOOOOO ", dev);
         this.setTitle(dev);
     }
 
@@ -68,13 +70,13 @@ public class InfoActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Coordinate GPS";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = "Altre info?";
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "Altre info 2?";
                 break;
         }
     }
