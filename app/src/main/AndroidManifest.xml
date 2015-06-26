@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lee.remote_android" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,6 +34,16 @@
             android:label="@string/title_activity_register" >
             <intent-filter>
                 <action android:name="com.example.lee.remote_android.RegisterActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".InfoActivity"
+            android:label="@string/title_activity_info" >
+            <intent-filter>
+                <action android:name="com.example.lee.remote_android.InfoActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

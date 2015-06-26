@@ -1,11 +1,14 @@
 package com.example.lee.remote_android;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,22 +18,34 @@ import org.json.JSONObject;
 import java.util.List;
 
 
-public class InterfaceActivity extends ActionBarActivity {
+public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
+    Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
-        ListView v1 = (ListView) findViewById(R.id.listDevices);
-      /*  v1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int selected = v1.getSelectedItemPosition();
-            }
-        });*/
+        this.setTitle("Remote Android");
+        final ListView v1 = (ListView) findViewById(R.id.listDevices);
+
+       v1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
+
+               String selectedFromList =(v1.getItemAtPosition(position).toString());
+               intlog.putExtra("Device",selectedFromList);
+
+               startActivity(intlog);
+           }
+       });
 
 
+        setValues(v1);
+    }
+
+    public void setValues(ListView contenitore) {
         HttpDevices elenco = new HttpDevices(HttpLogin.getLogin().getUser(),HttpLogin.getLogin().getPsw());
         elenco.execute();
         while(elenco.finish()){
@@ -43,24 +58,44 @@ public class InterfaceActivity extends ActionBarActivity {
         List<String> match = elenco.getStringa();
 
 
-        for (int i=0;i<match.size();i++) {
+        for (int i=0;i<match.size();i++)
             match.set(i,match.get(i).substring(4, match.get(i).length()));
-        }
+
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 match );
-        v1.setAdapter(arrayAdapter);
-
-
-
-
+        contenitore.setAdapter(arrayAdapter);
 
     }
 
 
     @Override
+   public void run() {
+        while(true){
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(10000);
+                                setValues((ListView) findViewById(R.id.listDevices));
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
+
+            }
+        }
+
+
+
+
+        @Override
     public void onPause()
     {
 
