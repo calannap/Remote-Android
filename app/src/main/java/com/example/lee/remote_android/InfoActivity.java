@@ -22,6 +22,8 @@ import android.widget.TextView;
 public class InfoActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+
+
     private String dev;
 
 
@@ -50,7 +52,7 @@ public class InfoActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         Bundle extras = getIntent().getExtras();
-        dev = extras.getString("KEY");
+        dev = extras.getString("Device");
         this.setTitle(dev);
     }
 
