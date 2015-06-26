@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lee.remote_android.R;
+import com.example.lee.remote_android.dummy.MyLocationListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,6 +35,7 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     public static String usr="";
     public static String pss="";
     public static String ip="";
+    public static String id="";
     public boolean finito=true;
 
     private HttpLogin(){
@@ -45,6 +47,10 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
         pss=s2;
     }
 
+    public String getId(){
+        return id;
+    }
+
     public String getUser(){
         return usr;
     }
@@ -54,6 +60,11 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
     }
 
     public String getIP() {return ip;}
+
+    public void setId(String s){
+        id = s;
+
+    }
 
     public static HttpLogin getLogin(){
 
@@ -91,7 +102,7 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
 
             device = device.replace(' ','+');
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip+"&lat="+ MyLocationListener.latitude+"&long="+MyLocationListener.longitude);
 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);

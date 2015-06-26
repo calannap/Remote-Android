@@ -6,6 +6,8 @@ package com.example.lee.remote_android;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.lee.remote_android.dummy.MyLocationListener;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -65,7 +67,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+ MyLocationListener.latitude+"&long="+MyLocationListener.longitude+"&id="+HttpLogin.getLogin().getId());
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();

@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
-                    String match="";
+                    String match="0";
                     HttpLogin connection = HttpLogin.getLogin();
                     connection.setUserPsw(user.getText().toString(), password.getText().toString());
                     connection.execute();
@@ -68,8 +68,8 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-                    if(match.equals("1")) {
-
+                    if(!match.equals("0")) {
+                        HttpLogin.getLogin().setId(match);
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
                         finish();
