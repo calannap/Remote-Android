@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
                     connection.execute();
                     while(connection.finish()){
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(100);
                         } catch (InterruptedException e) {
 
                         }

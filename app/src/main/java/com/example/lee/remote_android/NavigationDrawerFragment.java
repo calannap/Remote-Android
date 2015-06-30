@@ -60,7 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
     private View mFragmentContainerView;
 
     private int id;
-    private int mCurrentSelectedPosition = 0;
+    private int mCurrentSelectedPosition = -1;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -70,6 +70,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void setValue(String s){
         id = Integer.parseInt(s);
+        Log.i("TERZO PASSO",s);
     }
 
     @Override
@@ -206,7 +207,6 @@ public class NavigationDrawerFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment rFragment = null;
 
-        Log.i("ASD", String.valueOf(position));
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }
@@ -221,6 +221,7 @@ public class NavigationDrawerFragment extends Fragment {
             switch (mCurrentSelectedPosition) {
                 case 0:
                     rFragment = new FragCoord();
+                    Log.i("PASSO QUARTO",String.valueOf(id));
                     ((FragCoord)rFragment).setID(id);
                     break;
 

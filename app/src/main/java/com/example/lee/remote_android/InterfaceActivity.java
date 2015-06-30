@@ -35,6 +35,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
                String selectedFromList = match1.get(position)[0];
+               Log.i("PASSO UNO",selectedFromList);
                intlog.putExtra("Device", selectedFromList);
                startActivity(intlog);
 
@@ -66,7 +67,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     }
 
     public void setValues(ListView contenitore) {
-        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1]);
+        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID());
         elenco.execute();
         while(elenco.finish()){
             try {
@@ -110,8 +111,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
                         }
                     });
 
-
-
             }
         }
 
@@ -121,6 +120,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         @Override
     public void onPause()
     {
+
+
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
         HttpLogout out = new HttpLogout(LoginIstance.getIst().getIp(),device);
@@ -137,11 +138,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
 
 
-    @Override
-    public void onDestroy(){
-
-        super.onDestroy();
-    }
 
 
     @Override

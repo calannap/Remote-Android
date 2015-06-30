@@ -26,16 +26,12 @@ import java.util.List;
 
 public class HttpCoord extends AsyncTask<String, Void, String>  {
 
-    public String usr="";
-    public String pss="";
-    public String lat="";
-    public String log="";
-    public String id =LoginIstance.getIst().getID();
+
+    public String idses="";
     public boolean finito=true;
 
-    public HttpCoord(String s1, String s2){
-        usr=s1;
-        pss=s2;
+    public HttpCoord(String s1){
+        idses=s1;
     }
 
 
@@ -67,12 +63,8 @@ public class HttpCoord extends AsyncTask<String, Void, String>  {
 
         //http post
         try {
-            if (MyLocationListener.latitude!=0.0 && MyLocationListener.longitude!=0.0) {
-                lat = String.valueOf(MyLocationListener.latitude);
-                log = String.valueOf(MyLocationListener.longitude);
-            }
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+lat+"&long="+log+"&id="+id);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/cord.php?id="+idses);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -101,13 +93,12 @@ public class HttpCoord extends AsyncTask<String, Void, String>  {
                 JSONArray jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("TESTONE", "id: " + json_data.getInt("id") +
-                                    ", id_utenti: " + json_data.getString("id_utenti") +
-                                    ", ip: " + json_data.getString("ip") +
-                                    ", nome: " + json_data.getString("nome")
+                    Log.i("0MGDGFG", "lat: " + json_data.getString("lat") +
+                                    ", lon: " + json_data.getString("lon")
+
                     );
 
-                    stringaFinale.add(json_data.getString("id")  + " " + json_data.getString("id_utenti") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n");
+                    stringaFinale.add(json_data.getString("lat")  + " " + json_data.getString("lon")+ "\n\n");
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());

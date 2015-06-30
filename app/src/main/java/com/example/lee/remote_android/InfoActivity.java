@@ -47,7 +47,10 @@ public class InfoActivity extends ActionBarActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
+        Bundle extras = getIntent().getExtras();
+        dev = extras.getString("Device");
+        Log.i("PASSO DUE",dev);
+        mNavigationDrawerFragment.setValue(dev);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -55,9 +58,7 @@ public class InfoActivity extends ActionBarActivity
 
 
 
-        Bundle extras = getIntent().getExtras();
-        dev = extras.getString("Device");
-        mNavigationDrawerFragment.setValue(dev);
+
     }
 
     @Override

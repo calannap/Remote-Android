@@ -2,6 +2,7 @@ package com.example.lee.remote_android;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,27 @@ public class FragCoord extends Fragment {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                v1.setText(""+sesid++);
-                                v2.setText(""+sesid);
+                                Log.i("PASSO QUINTO",String.valueOf(sesid));
+                                HttpCoord cor = new HttpCoord(String.valueOf(sesid));
+                                cor.execute();
+
+                                while(cor.finish()){
+                                    try {
+                                        Thread.sleep(100);
+                                    } catch (InterruptedException e) {
+
+                                    }
+                                }
+
+                                Log.i("PUOKKODDIO",cor.getStringa().toString() );
+
+                               // String [] cord =  cor.getStringa().get(0).split(" ");
+
+                              //  v1.setText(cord[0]);
+                              //  v2.setText(cord[1]);
                             }
                         });
-                        Thread.sleep(3000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
