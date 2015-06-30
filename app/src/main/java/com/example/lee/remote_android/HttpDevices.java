@@ -6,8 +6,6 @@ package com.example.lee.remote_android;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.lee.remote_android.dummy.MyLocationListener;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,10 +28,6 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
-    public String lat="";
-    public String log="";
-    public String sesid="";
-    public String id =HttpLogin.getLogin().getId();
     public boolean finito=true;
 
     public HttpDevices(String s1, String s2){
@@ -44,10 +38,10 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
 
 
 
-    public List<String> output = new ArrayList<String>();
+    public List<String[]> output = new ArrayList<String[]>();
 
 
-    public List<String> getStringa(){
+    public List<String[]> getStringa(){
         return output;
     }
 
@@ -61,21 +55,17 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
         return null;
     }
 
-    protected List<String> inviaDati() {
+    protected List<String[]> inviaDati() {
         String result = "";
-        List<String> stringaFinale= new ArrayList<String>();
+        List<String[]> stringaFinale= new ArrayList<String[]>();
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("idnomerichiesto", "1"));
         InputStream is = null;
 
         //http post
         try {
-            if (MyLocationListener.latitude!=0.0 && MyLocationListener.longitude!=0.0) {
-                lat = String.valueOf(MyLocationListener.latitude);
-                log = String.valueOf(MyLocationListener.longitude);
-            }
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+lat+"&long="+log+"&id="+id);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -110,8 +100,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                              ", nome: " + json_data.getString("nome")
                     );
 
-
-                    stringaFinale.add(json_data.getString("id")  + " " + json_data.getString("id_utenti") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n");
+                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome") });
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());

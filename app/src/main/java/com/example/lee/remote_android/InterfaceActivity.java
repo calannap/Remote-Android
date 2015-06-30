@@ -15,13 +15,14 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     Handler mHandler = new Handler();
-    List<String> ids;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,13 +77,12 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
+        List<String[]> match1 = elenco.getStringa();
+        List<String> match = new ArrayList<String>();
 
 
-        List<String> match = elenco.getStringa();
-
-
-        for (int i=0;i<match.size();i++)
-            match.set(i,match.get(i).substring(4, match.get(i).length()));
+        for (int i=0;i<match1.size();i++)
+            match.add(match1.get(i)[3]);
 
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -92,7 +92,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         contenitore.setAdapter(arrayAdapter);
 
     }
-
 
 
     @Override
@@ -137,7 +136,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
-
     }
 
 
