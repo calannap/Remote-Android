@@ -6,8 +6,6 @@ package com.example.lee.remote_android;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.lee.remote_android.dummy.MyLocationListener;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,7 +30,7 @@ public class HttpCoord extends AsyncTask<String, Void, String>  {
     public String pss="";
     public String lat="";
     public String log="";
-    public String id =HttpLogin.getLogin().getId();
+    public String id =LoginIstance.getIst().getID();
     public boolean finito=true;
 
     public HttpCoord(String s1, String s2){

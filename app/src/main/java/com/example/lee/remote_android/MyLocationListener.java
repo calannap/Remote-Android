@@ -1,4 +1,4 @@
-package com.example.lee.remote_android.dummy;
+package com.example.lee.remote_android;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;

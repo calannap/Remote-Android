@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     TextView user,password;
     Button login;
     Button register;
-    HttpLogin connection = HttpLogin.getLogin();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onClickListener();
-        HttpLogin connection = HttpLogin.getLogin();
     }
 
 
@@ -55,12 +54,9 @@ public class MainActivity extends ActionBarActivity {
                     password = (TextView) findViewById(R.id.pswd);
                     String match="0";
 
+                    LoginIstance.getIst().setLog(user.getText().toString(), password.getText().toString());
+                    HttpLogin connection = new HttpLogin(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1]);
 
-                    //reistanzia
-                    if(connection.getStatus().equals(AsyncTask.Status.FINISHED))
-                        connection.freshIst();
-
-                    connection.setUserPsw(user.getText().toString(), password.getText().toString());
                     connection.execute();
                     while(connection.finish()){
                         try {
@@ -76,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
 
 
                     if(!match.equals("0")) {
-                        HttpLogin.getLogin().setId(match);
+                        LoginIstance.getIst().setID(match);
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);
                     }

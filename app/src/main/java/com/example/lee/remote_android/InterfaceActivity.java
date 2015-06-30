@@ -66,7 +66,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     }
 
     public void setValues(ListView contenitore) {
-        HttpDevices elenco = new HttpDevices(HttpLogin.getLogin().getUser(),HttpLogin.getLogin().getPsw());
+        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1]);
         elenco.execute();
         while(elenco.finish()){
             try {
@@ -130,7 +130,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     public void onDestroy(){
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
-        HttpLogout out = new HttpLogout(HttpLogin.getLogin().getIP(),device);
+        HttpLogout out = new HttpLogout(LoginIstance.getIst().getIp(),device);
         out.execute();
         while(out.finish()){
             try {

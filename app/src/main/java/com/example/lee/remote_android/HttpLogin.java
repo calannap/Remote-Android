@@ -1,15 +1,7 @@
 package com.example.lee.remote_android;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.lee.remote_android.R;
-import com.example.lee.remote_android.dummy.MyLocationListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,12 +18,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class HttpLogin extends AsyncTask<String, Void, String>  {
 
-    private static HttpLogin istanza = new HttpLogin();
     public static String usr="";
     public static String pss="";
     public static String ip="";
@@ -42,14 +32,9 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
 
     public boolean finito=true;
 
-    private HttpLogin(){
 
-    }
 
-    public void freshIst(){
-        istanza = new HttpLogin();
-    }
-    public void setUserPsw(String s1,String s2){
+    public HttpLogin(String s1,String s2){
         usr=s1;
         pss=s2;
     }
@@ -73,10 +58,6 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
 
     }
 
-    public static HttpLogin getLogin(){
-
-        return istanza;
-    }
 
    public String output="";
 
