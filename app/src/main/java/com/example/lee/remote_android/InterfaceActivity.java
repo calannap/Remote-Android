@@ -82,7 +82,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
 
         for (int i=0;i<match1.size();i++)
-            match.add(match1.get(i)[3]);
+            match.add(match1.get(i)[3] +"   "+match1.get(i)[2] );
 
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
