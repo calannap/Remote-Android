@@ -121,13 +121,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         @Override
     public void onPause()
     {
-        super.onPause();
-    }
-
-
-
-    @Override
-    public void onDestroy(){
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
         HttpLogout out = new HttpLogout(LoginIstance.getIst().getIp(),device);
@@ -139,6 +132,14 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
+        super.onPause();
+    }
+
+
+
+    @Override
+    public void onDestroy(){
+
         super.onDestroy();
     }
 
