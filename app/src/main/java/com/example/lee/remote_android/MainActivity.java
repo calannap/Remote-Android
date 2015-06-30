@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
                     LoginIstance.getIst().setLog(user.getText().toString(), password.getText().toString());
                     HttpLogin connection = new HttpLogin(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1]);
 
-                    connection.execute();
+
                     while(connection.finish()){
                         try {
                             Thread.sleep(1000);
