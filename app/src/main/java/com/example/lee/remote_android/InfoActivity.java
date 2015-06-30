@@ -1,6 +1,7 @@
 package com.example.lee.remote_android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -45,16 +46,18 @@ public class InfoActivity extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = dev;
+        mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+
+
         Bundle extras = getIntent().getExtras();
         dev = extras.getString("Device");
-        Log.i("FUNZIONAAAAAAAAAA???",dev);
+        mNavigationDrawerFragment.setValue(dev);
     }
 
     @Override
@@ -66,6 +69,12 @@ public class InfoActivity extends ActionBarActivity
                 .commit();
     }
 
+    @Override
+    public void onPause(){
+       finish();
+        super.onPause();
+    }
+
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
@@ -75,7 +84,7 @@ public class InfoActivity extends ActionBarActivity
                 mTitle = "Rubrica";
                 break;
             case 3:
-                mTitle = "Altre info 2?";
+                mTitle = "Chiamami";
                 break;
         }
     }

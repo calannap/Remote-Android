@@ -59,11 +59,17 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
+    private int id;
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
     public NavigationDrawerFragment() {
+    }
+
+
+    public void setValue(String s){
+        id = Integer.parseInt(s);
     }
 
     @Override
@@ -110,7 +116,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         "Coordinate GPS",
                         "Rubrica",
-                        "Altre info2?",
+                        "Chiamami",
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -215,7 +221,7 @@ public class NavigationDrawerFragment extends Fragment {
             switch (mCurrentSelectedPosition) {
                 case 0:
                     rFragment = new FragCoord();
-                    ((FragCoord)rFragment).setID(0);
+                    ((FragCoord)rFragment).setID(id);
                     break;
 
                 case 1:

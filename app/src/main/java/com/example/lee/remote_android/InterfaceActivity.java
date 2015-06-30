@@ -22,7 +22,7 @@ import java.util.List;
 public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     Handler mHandler = new Handler();
-
+    List<String[]> match1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +34,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
-
-               String selectedFromList = (v1.getItemAtPosition(position).toString());
+               String selectedFromList = match1.get(position)[0];
                intlog.putExtra("Device", selectedFromList);
-
                startActivity(intlog);
 
            }
@@ -77,7 +75,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
-        List<String[]> match1 = elenco.getStringa();
+         match1 = elenco.getStringa();
         List<String> match = new ArrayList<String>();
 
 
@@ -123,8 +121,13 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         @Override
     public void onPause()
     {
+        super.onPause();
+    }
 
 
+
+    @Override
+    public void onDestroy(){
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
         HttpLogout out = new HttpLogout(HttpLogin.getLogin().getIP(),device);
@@ -136,6 +139,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
+        super.onDestroy();
     }
 
 

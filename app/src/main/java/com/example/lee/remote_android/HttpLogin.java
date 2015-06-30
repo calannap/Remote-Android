@@ -46,6 +46,9 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
 
     }
 
+    public void freshIst(){
+        istanza = new HttpLogin();
+    }
     public void setUserPsw(String s1,String s2){
         usr=s1;
         pss=s2;
