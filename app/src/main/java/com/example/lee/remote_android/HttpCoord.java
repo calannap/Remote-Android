@@ -26,17 +26,16 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpDevices extends AsyncTask<String, Void, String>  {
+public class HttpCoord extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
     public String lat="";
     public String log="";
-    public String sesid="";
     public String id =HttpLogin.getLogin().getId();
     public boolean finito=true;
 
-    public HttpDevices(String s1, String s2){
+    public HttpCoord(String s1, String s2){
         usr=s1;
         pss=s2;
     }
@@ -106,10 +105,9 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Log.i("TESTONE", "id: " + json_data.getInt("id") +
                                     ", id_utenti: " + json_data.getString("id_utenti") +
-                             ", ip: " + json_data.getString("ip") +
-                             ", nome: " + json_data.getString("nome")
+                                    ", ip: " + json_data.getString("ip") +
+                                    ", nome: " + json_data.getString("nome")
                     );
-
 
                     stringaFinale.add(json_data.getString("id")  + " " + json_data.getString("id_utenti") + " " + json_data.getString("ip")+ " " + json_data.getString("nome") + "\n\n");
                 }

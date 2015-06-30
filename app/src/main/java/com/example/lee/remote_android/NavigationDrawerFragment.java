@@ -215,6 +215,7 @@ public class NavigationDrawerFragment extends Fragment {
             switch (mCurrentSelectedPosition) {
                 case 0:
                     rFragment = new FragCoord();
+                    ((FragCoord)rFragment).setID(0);
                     break;
 
                 case 1:

@@ -21,7 +21,7 @@ import java.util.List;
 public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     Handler mHandler = new Handler();
-
+    List<String> ids;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +76,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
             }
         }
+
+
         List<String> match = elenco.getStringa();
 
 
@@ -90,6 +92,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         contenitore.setAdapter(arrayAdapter);
 
     }
+
 
 
     @Override

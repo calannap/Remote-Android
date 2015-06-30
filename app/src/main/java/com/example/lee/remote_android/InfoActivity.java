@@ -54,6 +54,7 @@ public class InfoActivity extends ActionBarActivity
 
         Bundle extras = getIntent().getExtras();
         dev = extras.getString("Device");
+        Log.i("FUNZIONAAAAAAAAAA???",dev);
     }
 
     @Override
