@@ -140,12 +140,12 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
                 JSONArray jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("TEST", "valore: " + json_data.getInt("valore")
+                    Log.i("TEST", "max(id): " + json_data.getInt("max(id)")
                                    // ", user: " + json_data.getString("user") +
                                   //  ", pass: " + json_data.getString("pass") +
                                    // ", email: " + json_data.getString("email")
                     );
-                    stringaFinale = json_data.getString("valore");
+                    stringaFinale = json_data.getString("max(id)");
                     // + " " + json_data.getString("user") + " " + json_data.getString("pass")+ " " + json_data.getString("email") + "\n\n";
                 }
             } catch (JSONException e) {

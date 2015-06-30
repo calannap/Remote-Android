@@ -73,7 +73,7 @@ public class InfoActivity extends ActionBarActivity
                 mTitle = "Coordinate GPS";
                 break;
             case 2:
-                mTitle = "Altre info?";
+                mTitle = "Rubrica";
                 break;
             case 3:
                 mTitle = "Altre info 2?";
