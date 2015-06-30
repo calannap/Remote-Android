@@ -99,7 +99,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("ASD", "ASDDDD");
+
                 selectItem(position);
             }
         });
@@ -198,8 +198,9 @@ public class NavigationDrawerFragment extends Fragment {
 
         mCurrentSelectedPosition = position;
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment rFragment=null;
+        Fragment rFragment = null;
 
+        Log.i("ASD", String.valueOf(position));
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }
@@ -210,33 +211,35 @@ public class NavigationDrawerFragment extends Fragment {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
 
-        if(mCurrentSelectedPosition!=0) {
+
             switch (mCurrentSelectedPosition) {
-                case 1:
+                case 0:
                     rFragment = new FragCoord();
                     break;
 
-                case 2:
+                case 1:
                     rFragment = new FragRubrica();
                     break;
 
-                case 3:
+                case 2:
                     rFragment = new FragCall();
                     break;
 
-            }
 
 
-            //Replace fragment
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.drawer_layout, rFragment);
-            ft.commit();
+
+
 
         }
 
-
+        //Replace fragment
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.container, rFragment);
+        ft.commit();
 
     }
+
+
 
 
     @Override
