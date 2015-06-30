@@ -30,6 +30,9 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
 
     public String usr="";
     public String pss="";
+    public String lat="";
+    public String log="";
+    public String id =HttpLogin.getLogin().getId();
     public boolean finito=true;
 
     public HttpDevices(String s1, String s2){
@@ -66,8 +69,12 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
 
         //http post
         try {
+            if (MyLocationListener.latitude!=0.0 && MyLocationListener.longitude!=0.0) {
+                lat = String.valueOf(MyLocationListener.latitude);
+                log = String.valueOf(MyLocationListener.longitude);
+            }
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+ MyLocationListener.latitude+"&long="+MyLocationListener.longitude+"&id="+HttpLogin.getLogin().getId());
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+lat+"&long="+log+"&id="+id);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
