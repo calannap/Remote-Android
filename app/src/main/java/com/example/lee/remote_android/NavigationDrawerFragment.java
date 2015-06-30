@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -98,6 +99,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("ASD", "ASDDDD");
                 selectItem(position);
             }
         });
@@ -194,20 +196,46 @@ public class NavigationDrawerFragment extends Fragment {
 
     private void selectItem(int position) {
 
-        //Replace fragment content
+        mCurrentSelectedPosition = position;
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment rFragment;
-        rFragment = new FragCoords();
+        Fragment rFragment=null;
+
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
+        }
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+
+        if(mCurrentSelectedPosition!=0) {
+            switch (mCurrentSelectedPosition) {
+                case 1:
+                    rFragment = new FragCoord();
+                    break;
+
+                case 2:
+                    rFragment = new FragRubrica();
+                    break;
+
+                case 3:
+                    rFragment = new FragCall();
+                    break;
+
+            }
 
 
-        //  rFragment.setArguments(data);
+            //Replace fragment
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.drawer_layout, rFragment);
+            ft.commit();
 
-        //Replace fragment
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.navigation_drawer, rFragment);
+        }
 
-        ft.commit();
-        mDrawerLayout.closeDrawer(mDrawerListView);
+
+
     }
 
 

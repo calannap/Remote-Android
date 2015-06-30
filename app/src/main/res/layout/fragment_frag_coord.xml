@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.example.lee.remote_android.FragCoord">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:layout_width="155dp"
+        android:layout_height="66dp"
+        android:text="Monitora spostamento "
+        android:id="@+id/button3"
+        android:layout_gravity="left|top" />
+
+    <EditText
+        android:layout_width="201dp"
+        android:layout_height="65dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1"
+        android:id="@+id/textView3"
+        android:layout_gravity="right|top" />
+
+    <TextView
+        android:layout_width="181dp"
+        android:layout_height="37dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtLat"
+        android:layout_gravity="left|center_vertical"
+        android:text="0" />
+
+    <TextView
+        android:layout_width="181dp"
+        android:layout_height="37dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtLon"
+        android:layout_gravity="right|center_vertical"
+        android:text="0" />
+
+</FrameLayout>

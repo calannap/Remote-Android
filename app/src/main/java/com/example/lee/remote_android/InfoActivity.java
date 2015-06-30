@@ -45,7 +45,7 @@ public class InfoActivity extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = dev;
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -54,8 +54,6 @@ public class InfoActivity extends ActionBarActivity
 
         Bundle extras = getIntent().getExtras();
         dev = extras.getString("Device");
-        Log.i("TITOLOOOOOOOO ", dev);
-        this.setTitle(dev);
     }
 
     @Override
