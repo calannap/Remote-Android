@@ -31,45 +31,6 @@ public class FragCoord extends Fragment {
 
         v1= (TextView) myInflatedView.findViewById(R.id.textView3);
         v2= (TextView) myInflatedView.findViewById(R.id.textView4);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
-
-                    try {
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.i("PASSO QUINTO",String.valueOf(sesid));
-                                HttpCoord cor = new HttpCoord(String.valueOf(sesid));
-                                cor.execute();
-
-                                while(cor.finish()){
-                                    try {
-                                        Thread.sleep(100);
-                                    } catch (InterruptedException e) {
-
-                                    }
-                                }
-
-                                Log.i("PUOKKODDIO",cor.getStringa().toString() );
-
-                               // String [] cord =  cor.getStringa().get(0).split(" ");
-
-                              //  v1.setText(cord[0]);
-                              //  v2.setText(cord[1]);
-                            }
-                        });
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        thread.start();
-        v1.setText("Text to Display");
 
         return myInflatedView;
     }

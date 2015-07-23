@@ -88,6 +88,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         // Select either the default item (0) or the last selected item.
+        if(mCurrentSelectedPosition >= 0)
         selectItem(mCurrentSelectedPosition);
     }
 
@@ -218,11 +219,13 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
 
+                    rFragment = new Fragment();
             switch (mCurrentSelectedPosition) {
+
                 case 0:
                     rFragment = new FragCoord();
                     Log.i("PASSO QUARTO",String.valueOf(id));
-                    ((FragCoord)rFragment).setID(id);
+                   ((FragCoord)rFragment).setID(id);
                     break;
 
                 case 1:

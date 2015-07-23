@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -22,7 +26,9 @@ public class MainActivity extends ActionBarActivity {
     TextView user,password;
     Button login;
     Button register;
-
+    GoogleCloudMessaging gcm;
+    String regid;
+    String PROJECT_NUMBER = "508859012792";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,36 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    public void getRegId(){
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+                    if (gcm == null) {
+                        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                    }
+                    regid = gcm.register(PROJECT_NUMBER);
+                    msg = "Device registered, registration ID=" + regid;
+                    Log.i("GCM",  msg);
 
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+
+               // etRegId.setText(msg + "\n");
+            }
+        }.execute(null, null, null);
+    }
 
     public void onClickListener() {
+
             login = (Button) findViewById(R.id.button);
             register = (Button) findViewById(R.id.button2);
 
@@ -50,6 +83,7 @@ public class MainActivity extends ActionBarActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    getRegId();
                     user = (TextView) findViewById(R.id.usr);
                     password = (TextView) findViewById(R.id.pswd);
                     String match="0";
