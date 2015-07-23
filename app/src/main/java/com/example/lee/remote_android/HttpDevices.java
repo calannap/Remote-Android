@@ -73,7 +73,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                 lat = String.valueOf(MyLocationListener.latitude);
                 log = String.valueOf(MyLocationListener.longitude);
             }
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&lat="+lat+"&lon="+log+"&id"+id);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&id="+id);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
