@@ -29,6 +29,7 @@ public class FragRubrica extends Fragment {
         chiama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.e("AWEEWE",number.getText().toString());
             }
         });
