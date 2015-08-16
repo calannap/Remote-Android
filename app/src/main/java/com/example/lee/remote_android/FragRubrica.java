@@ -13,8 +13,13 @@ import android.widget.TextView;
 
 public class FragRubrica extends Fragment {
 
+    public int sesid=0;
     Button chiama;
     TextView number;
+
+    public void setID(int id){
+        sesid=id;
+    }
 
 
     @Override
@@ -30,7 +35,7 @@ public class FragRubrica extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.e("AWEEWE",number.getText().toString());
+                Log.e("AWEEWE",number.getText().toString()+" "+"PASSO QUARTO: "+sesid);
             }
         });
         return view;

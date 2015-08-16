@@ -229,7 +229,9 @@ public class NavigationDrawerFragment extends Fragment {
                     break;
 
                 case 1:
+
                     rFragment = new FragRubrica();
+                    ((FragRubrica)rFragment).setID(id);
                     break;
 
                 case 2:
