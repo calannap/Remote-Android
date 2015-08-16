@@ -117,8 +117,8 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[]{
                         "Coordinate GPS",
-                        "Rubrica",
-                        "Chiamami",
+                        "Chiama",
+                        "Spegni",
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -224,7 +224,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                 case 0:
                     rFragment = new FragCoord();
-                    Log.i("PASSO QUARTO",String.valueOf(id));
+
                    ((FragCoord)rFragment).setID(id);
                     break;
 
@@ -299,11 +299,7 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Modalita' aerea attivata!", Toast.LENGTH_SHORT).show();
-          //  ((Activity)getContext()).finish();
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
