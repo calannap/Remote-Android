@@ -73,7 +73,9 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                 lat = String.valueOf(MyLocationListener.latitude);
                 log = String.valueOf(MyLocationListener.longitude);
             }
-            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&id="+id);
+            Log.e("GGWP","http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&id="+id+"&lat="+lat+"&long="+log);
+            HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&id="+id+"&lat="+lat+"&long="+log);
+
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -108,7 +110,8 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                              ", nome: " + json_data.getString("nome")
                     );*/
 
-                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome") });
+                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome"),json_data.getString("lat"),json_data.getString("long") });
+
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());

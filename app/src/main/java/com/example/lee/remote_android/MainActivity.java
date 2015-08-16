@@ -77,6 +77,7 @@ public class MainActivity extends ActionBarActivity {
 
 
                     if(!match.equals("0")) {
+
                         LoginIstance.getIst().setID(match);
                         Intent intlog = new Intent("com.example.lee.remote_android.InterfaceActivity");
                         startActivity(intlog);

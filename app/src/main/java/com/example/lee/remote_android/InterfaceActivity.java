@@ -66,6 +66,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         thread.start();
     }
 
+
+
     public void setValues(ListView contenitore) {
         HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID());
         elenco.execute();
