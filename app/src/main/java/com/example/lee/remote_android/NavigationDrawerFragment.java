@@ -224,7 +224,6 @@ public class NavigationDrawerFragment extends Fragment {
 
                 case 0:
                     rFragment = new FragCoord();
-
                    ((FragCoord)rFragment).setID(id);
                     break;
 
