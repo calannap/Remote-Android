@@ -109,7 +109,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                              ", nome: " + json_data.getString("nome")
                     );*/
 
-                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome"),json_data.getString("lat"),json_data.getString("long") });
+                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome"),json_data.getString("lat"),json_data.getString("long"),json_data.getString("num") });
 
                 }
             } catch (JSONException e) {

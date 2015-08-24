@@ -10,6 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 
 public class FragRubrica extends Fragment {
 
@@ -35,7 +42,9 @@ public class FragRubrica extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.e("AWEEWE",number.getText().toString()+" "+"PASSO QUARTO: "+sesid);
+                HttpCall asd = new HttpCall(sesid+"",number.getText().toString());
+                asd.execute();
+
             }
         });
         return view;

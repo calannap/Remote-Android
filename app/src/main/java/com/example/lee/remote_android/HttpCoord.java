@@ -94,11 +94,11 @@ public class HttpCoord extends AsyncTask<String, Void, String>  {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Log.i("0MGDGFG", "lat: " + json_data.getString("lat") +
-                                    ", lon: " + json_data.getString("lon")
+                                    ", long: " + json_data.getString("long")
 
                     );
 
-                    stringaFinale.add(json_data.getString("lat")  + " " + json_data.getString("lon")+ "\n\n");
+                    stringaFinale.add(json_data.getString("lat")  + " " + json_data.getString("long")+ "\n\n");
                 }
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());
