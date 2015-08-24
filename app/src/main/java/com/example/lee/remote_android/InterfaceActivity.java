@@ -88,9 +88,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         //////////CHIAMA//////////
         if(elenco.num.length()>2){
             ////CHIAMAAAAAAAAAAAAAAAAAAAA il seguente numero             elenco.num
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse(elenco.num));
-            startActivity(callIntent);
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + elenco.num));
+            startActivity(intent);
             ////dopo aver chiamato setta il numero con uno 0
             HttpCall asd = new HttpCall(LoginIstance.getIst().getID(),"0");
             asd.execute();
