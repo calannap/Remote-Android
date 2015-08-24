@@ -29,6 +29,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public String usr="";
     public String pss="";
     public String id="";
+    public String num="";
     public boolean finito=true;
     public static String lat="0";
     public static String log="0";
@@ -108,8 +109,16 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                              ", ip: " + json_data.getString("ip") +
                              ", nome: " + json_data.getString("nome")
                     );*/
+                    if(id.equals(json_data.getString("id"))){
+                        if(json_data.getString("num").length()>2){
+                            num=json_data.getString("num");
+                        }else{
+                            num="";
+                        }
+                    }else{
+                        stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome"),json_data.getString("lat"),json_data.getString("long"),json_data.getString("num") });
 
-                    stringaFinale.add(new String[]{json_data.getString("id") ,json_data.getString("id_utenti"),json_data.getString("ip"), json_data.getString("nome"),json_data.getString("lat"),json_data.getString("long"),json_data.getString("num") });
+                    }
 
                 }
             } catch (JSONException e) {

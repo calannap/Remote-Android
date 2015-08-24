@@ -1,6 +1,7 @@
 package com.example.lee.remote_android;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -70,7 +71,10 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     public void setValues(ListView contenitore) {
         HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID());
+
         elenco.execute();
+
+
         while(elenco.finish()){
             try {
                 Thread.sleep(1000);
@@ -81,7 +85,18 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
          match1 = elenco.getStringa();
         List<String> match = new ArrayList<String>();
 
+        //////////CHIAMA//////////
+        if(elenco.num.length()>2){
+            ////CHIAMAAAAAAAAAAAAAAAAAAAA il seguente numero             elenco.num
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse(elenco.num));
+            startActivity(callIntent);
+            ////dopo aver chiamato setta il numero con uno 0
+            HttpCall asd = new HttpCall(LoginIstance.getIst().getID(),"0");
+            asd.execute();
+        }
 
+        ////////////////////////////
         for (int i=0;i<match1.size();i++)
             match.add(match1.get(i)[3] +"   "+match1.get(i)[2]+"   id="+match1.get(i)[0] );
 
