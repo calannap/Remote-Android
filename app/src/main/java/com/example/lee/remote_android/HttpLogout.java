@@ -97,7 +97,7 @@ public class HttpLogout extends AsyncTask<String, Void, String>  {
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());
             }
-        } else {  //is è null e non ho avuto risposta
+        } else {  //is e null e non ho avuto risposta
         }
         return stringaFinale;
     }

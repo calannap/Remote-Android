@@ -3,7 +3,9 @@ package com.example.lee.remote_android;
 /**
  * Created by Lee on 25/06/2015.
  */
+import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -33,11 +35,15 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public boolean finito=true;
     public static String lat="0";
     public static String log="0";
+    Context cont;
 
-    public HttpDevices(String s1, String s2,String s3){
+    public HttpDevices(String s1, String s2,String s3,String s4, String s5){
         usr=s1;
         pss=s2;
         id=s3;
+        lat = s4;
+        log = s5;
+
     }
 
 
@@ -70,10 +76,6 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
         //http post
         try {
             HttpClient httpclient = new DefaultHttpClient();
-         //   if (MyLocationListener.latitude!=0.0 && MyLocationListener.longitude!=0.0) {
-                lat = String.valueOf(MyLocationListener.latitude);
-                log = String.valueOf(MyLocationListener.longitude);
-         //   }
             HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/connessione.php?user="+usr+"&pass="+pss+"&id="+id+"&lat="+lat+"&long="+log);
 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -124,8 +126,9 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
             } catch (JSONException e) {
                 Log.e("log_tag", "Error parsing data " + e.toString());
             }
-        } else {  //is è null e non ho avuto risposta
+        } else {  //is e null e non ho avuto risposta
         }
+
         return stringaFinale;
     }
 }

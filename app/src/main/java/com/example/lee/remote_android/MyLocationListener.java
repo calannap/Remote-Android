@@ -1,39 +1,55 @@
 package com.example.lee.remote_android;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.view.Menu;
 
 public class MyLocationListener implements LocationListener {
 
-    public static double latitude;
-    public static double longitude;
-    private static MyLocationListener loc = new MyLocationListener();
-    public MyLocationListener(){}
+    double latitude;
+    double  longitude;
 
-    public MyLocationListener getInstance(){
-        return loc;
-    }
-    @Override
-    public void onLocationChanged(Location loc)
-    {
-        loc.getLatitude();
-        loc.getLongitude();
-        latitude=loc.getLatitude();
-        longitude=loc.getLongitude();
+
+    public MyLocationListener(Context myContext){
+        LocationManager locationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
+    public  double getLatitude(){
+        return latitude; }
+
+    public  double getLongitude(){
+        return longitude; }
+
     @Override
-    public void onProviderDisabled(String provider)
-    {
-        //print "Currently GPS is Disabled";
+    public void onLocationChanged(Location location) {
+        // TODO Auto-generated method stub
+
+       latitude =  location.getLatitude();
+        longitude =  location.getLongitude();
+
     }
+
     @Override
-    public void onProviderEnabled(String provider)
-    {
-        //print "GPS got Enabled";
+    public void onProviderDisabled(String provider) {
+        // TODO Auto-generated method stub
+
     }
+
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras)
-    {
+    public void onProviderEnabled(String provider) {
+        // TODO Auto-generated method stub
+
     }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

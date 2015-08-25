@@ -90,10 +90,6 @@ public class HttpLogin extends AsyncTask<String, Void, String>  {
 
             device = device.replace(' ','+');
             HttpClient httpclient = new DefaultHttpClient();
-            if (MyLocationListener.latitude!=0.0 && MyLocationListener.longitude!=0.0) {
-                lat = String.valueOf(MyLocationListener.latitude);
-                log = String.valueOf(MyLocationListener.longitude);
-            }
             HttpPost httppost = new HttpPost("http://88.116.86.82/android/remote/controllouser.php?user="+usr+"&pass="+pss+"&device="+device+"&ip="+ip);
 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
