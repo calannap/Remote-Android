@@ -33,8 +33,8 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public String id="";
     public String num="";
     public boolean finito=true;
-    public static String lat="0";
-    public static String log="0";
+    public String lat="0";
+    public String log="0";
     Context cont;
 
     public HttpDevices(String s1, String s2,String s3,String s4, String s5){
