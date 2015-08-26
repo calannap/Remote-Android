@@ -76,12 +76,6 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
         String lat = MyLocationListener.getLatitude(this);
         String log = MyLocationListener.getLongitude(this);
-        CharSequence text = lat+"  "+log;
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(this, text, duration);
-        toast.show();
-
         HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),lat,log);
 
         elenco.execute();
