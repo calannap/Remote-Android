@@ -35,6 +35,8 @@ public class MainActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyLocationListener locListener = new MyLocationListener(this); //In your MainActivity instanciate a NastyLocationListener (its only needed once... All other Activities could get data from him)
+        locListener.startListening();
         onClickListener();
     }
 

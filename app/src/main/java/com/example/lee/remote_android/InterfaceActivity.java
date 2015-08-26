@@ -70,8 +70,8 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
 
     public void setValues(ListView contenitore) {
-        MyLocationListener ggwp = new MyLocationListener(InterfaceActivity.this);
-        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),String.valueOf(ggwp.getLatitude()),String.valueOf(ggwp.getLongitude()));
+
+        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),MyLocationListener.getLatitude(this),MyLocationListener.getLongitude(this));
 
         elenco.execute();
 
