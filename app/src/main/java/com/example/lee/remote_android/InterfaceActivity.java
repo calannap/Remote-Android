@@ -1,5 +1,6 @@
 package com.example.lee.remote_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -71,7 +73,16 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
     public void setValues(ListView contenitore) {
 
-        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),MyLocationListener.getLatitude(this),MyLocationListener.getLongitude(this));
+
+        String lat = MyLocationListener.getLatitude(this);
+        String log = MyLocationListener.getLongitude(this);
+        CharSequence text = lat+"  "+log;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(this, text, duration);
+        toast.show();
+
+        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),lat,log);
 
         elenco.execute();
 
