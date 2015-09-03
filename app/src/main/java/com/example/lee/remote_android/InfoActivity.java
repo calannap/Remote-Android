@@ -26,7 +26,7 @@ public class InfoActivity extends ActionBarActivity
 
 
 
-    private String dev;
+    private String dev,lat,log;
 
 
     /**
@@ -49,8 +49,10 @@ public class InfoActivity extends ActionBarActivity
         mTitle = getTitle();
         Bundle extras = getIntent().getExtras();
         dev = extras.getString("Device");
+        lat = extras.getString("Lat");
+        log = extras.getString("Long");
         Log.i("PASSO DUE",dev);
-        mNavigationDrawerFragment.setValue(dev);
+        mNavigationDrawerFragment.setValue(dev,lat,log);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -82,10 +84,10 @@ public class InfoActivity extends ActionBarActivity
                 mTitle = "Coordinate GPS";
                 break;
             case 2:
-                mTitle = "Rubrica";
+                mTitle = "Chiamami";
                 break;
             case 3:
-                mTitle = "Chiamami";
+                mTitle = "Modalita' Aerea";
                 break;
         }
     }

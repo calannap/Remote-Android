@@ -24,8 +24,13 @@ import java.util.List;
 
 public class InterfaceActivity extends ActionBarActivity implements Runnable {
 
+
     Handler mHandler = new Handler();
     List<String[]> match1;
+    String lat="";
+    String log="";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +43,14 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intlog = new Intent("com.example.lee.remote_android.InfoActivity");
                String selectedFromList = match1.get(position)[0];
-               Log.i("PASSO UNO",selectedFromList);
-               intlog.putExtra("Device", selectedFromList);
+               Log.i("PASSO UNO", selectedFromList);
+
+               Bundle extras = new Bundle();
+               extras.putString("Device",selectedFromList);
+               extras.putString("Lat", lat);
+               extras.putString("Long", log);
+
+               intlog.putExtras(extras);
                startActivity(intlog);
 
            }
@@ -58,7 +69,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
                                setValues(v1);
                            }
                        });
-                       Thread.sleep(3000);
+                       Thread.sleep(10000);
                    } catch (InterruptedException e) {
                        e.printStackTrace();
                    }
@@ -74,8 +85,9 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     public void setValues(ListView contenitore) {
 
 
-        String lat = MyLocationListener.getLatitude(this);
-        String log = MyLocationListener.getLongitude(this);
+       lat = MyLocationListener.getLatitude(this);
+        log = MyLocationListener.getLongitude(this);
+
         HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),lat,log);
 
         elenco.execute();
@@ -105,6 +117,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         for (int i=0;i<match1.size();i++)
             match.add(match1.get(i)[3] +"   "+match1.get(i)[2]+"   id="+match1.get(i)[0] +"   Coord="+match1.get(i)[4] +"-"+match1.get(i)[5]);
 
+        Container.getMioSingolo().cont = match1;
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,

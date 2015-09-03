@@ -1,5 +1,6 @@
 package com.example.lee.remote_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -58,7 +59,7 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
-
+    private String lat,log;
     private int id;
     private int mCurrentSelectedPosition = -1;
     private boolean mFromSavedInstanceState;
@@ -68,10 +69,13 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
 
-    public void setValue(String s){
-        id = Integer.parseInt(s);
-        Log.i("TERZO PASSO",s);
+    public void setValue(String s1, String s2, String s3){
+        id = Integer.parseInt(s1);
+        Log.i("TERZO PASSO",s1);
+        lat = s2;
+        log = s3;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -225,6 +229,7 @@ public class NavigationDrawerFragment extends Fragment {
                 case 0:
                     rFragment = new FragCoord();
                    ((FragCoord)rFragment).setID(id);
+                    ((FragCoord)rFragment).setCoords(lat,log);
                     break;
 
                 case 1:
