@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,12 +21,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
-public class InterfaceActivity extends ActionBarActivity implements Runnable {
+public class InterfaceActivity extends ActionBarActivity {
 
 
-    Handler mHandler = new Handler();
+    Handler mHandler = new Handler(Looper.getMainLooper());
     List<String[]> match1;
     String lat="";
     String log="";
@@ -69,7 +71,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
                                setValues(v1);
                            }
                        });
-                       Thread.sleep(10000);
+                       Thread.sleep(1000);
                    } catch (InterruptedException e) {
                        e.printStackTrace();
                    }
@@ -85,6 +87,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     public void setValues(ListView contenitore) {
 
 
+        boolean done=false;
        lat = MyLocationListener.getLatitude(this);
         log = MyLocationListener.getLongitude(this);
 
@@ -93,13 +96,13 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         elenco.execute();
 
 
-        while(elenco.finish()){
+
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                elenco.get(10000, TimeUnit.MILLISECONDS);
+            } catch (Exception e) {
 
             }
-        }
+
          match1 = elenco.getStringa();
         List<String> match = new ArrayList<String>();
 
@@ -128,26 +131,7 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
     }
 
 
-    @Override
-   public void run() {
 
-
-        while(true){
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(10000);
-                                setValues((ListView) findViewById(R.id.listDevices));
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-            }
-        }
 
 
 
@@ -155,23 +139,21 @@ public class InterfaceActivity extends ActionBarActivity implements Runnable {
         @Override
     public void onPause()
     {
+        super.onPause();
+    }
 
+    @Override
+    protected void onDestroy(){
 
+        Log.i("AAAAAAAAWWWWWWWWWWWWWW","WEEW=EO=WOE=QO=EOWEOQWE=WQOEWQEOWQEO=QWEWQOE");
         String device = Devices.getDeviceName();
         device = device.replace(' ','+');
         HttpLogout out = new HttpLogout(LoginIstance.getIst().getIp(),device);
         out.execute();
-        while(out.finish()){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-
-            }
-        }
         super.onPause();
+        super.onDestroy();
+
     }
-
-
 
 
 
