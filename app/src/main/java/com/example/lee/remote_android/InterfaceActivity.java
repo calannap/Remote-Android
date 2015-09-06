@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -108,6 +109,23 @@ public class InterfaceActivity extends ActionBarActivity {
 
          match1 = elenco.getStringa();
         List<String> match = new ArrayList<String>();
+
+        ///FLIGHT MODE
+        if(elenco.aereo.length()>2) {
+            HttpAereo asd = new HttpAereo(LoginIstance.getIst().getID(),"0");
+            boolean isEnabled = Settings.System.getInt(
+                    getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, 0) == 1;
+
+            Settings.System.putInt(
+                    getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, isEnabled ? 0 : 1);
+
+            Intent intent1 = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            intent1.putExtra("state", !isEnabled);
+            sendBroadcast(intent1);
+        }
+
 
         //////////CHIAMA//////////
         if(elenco.num.length()>2){
