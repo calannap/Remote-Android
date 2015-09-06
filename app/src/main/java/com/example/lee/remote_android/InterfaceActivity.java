@@ -83,6 +83,9 @@ public class InterfaceActivity extends ActionBarActivity {
     }
 
 
+    public void update(){
+
+    };
 
     public void setValues(ListView contenitore) {
 
@@ -97,7 +100,7 @@ public class InterfaceActivity extends ActionBarActivity {
 
 
 
-            try {
+           try {
                 elenco.get(10000, TimeUnit.MILLISECONDS);
             } catch (Exception e) {
 

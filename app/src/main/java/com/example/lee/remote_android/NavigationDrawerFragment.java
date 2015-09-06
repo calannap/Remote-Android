@@ -240,6 +240,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                 case 2:
                     rFragment = new FragCall();
+                    ((FragCall)rFragment).setID(id);
                     break;
 
 

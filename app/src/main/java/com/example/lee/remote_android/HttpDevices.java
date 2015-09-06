@@ -37,6 +37,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public String log="0";
     Context cont;
 
+
     public HttpDevices(String s1, String s2,String s3,String s4, String s5){
         usr=s1;
         pss=s2;
@@ -131,4 +132,5 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
 
         return stringaFinale;
     }
+
 }
