@@ -32,6 +32,7 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public String pss="";
     public String id="";
     public String num="";
+    public String aereo="";
     public boolean finito=true;
     public String lat="0";
     public String log="0";
@@ -113,6 +114,11 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
                              ", nome: " + json_data.getString("nome")
                     );*/
                     if(id.equals(json_data.getString("id"))){
+                        if(json_data.getString("aereo").length()>2){
+                            aereo=json_data.getString("aereo");
+                        }else{
+                            aereo="";
+                        }
                         if(json_data.getString("num").length()>2){
                             num=json_data.getString("num");
                         }else{
