@@ -1,13 +1,12 @@
 package com.example.lee.remote_android;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,14 +14,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class InterfaceActivity extends ActionBarActivity {
@@ -40,6 +34,17 @@ public class InterfaceActivity extends ActionBarActivity {
         setContentView(R.layout.activity_interface);
         this.setTitle("Remote Android");
         final ListView v1 = (ListView) findViewById(R.id.listDevices);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getStringArrayList("MATCH") != null) {
+                ArrayList<String> match =savedInstanceState.getStringArrayList("MATCH");
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        InterfaceActivity.this,
+                        android.R.layout.simple_list_item_1,
+                        match );
+                v1.setAdapter(arrayAdapter);
+            }
+        }
 
        v1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
@@ -69,7 +74,9 @@ public class InterfaceActivity extends ActionBarActivity {
                        mHandler.post(new Runnable() {
                            @Override
                            public void run() {
-                               setValues(v1);
+                               if (hasFinished) {
+                                   setValues(v1);
+                               }
                            }
                        });
                        Thread.sleep(1000);
@@ -83,84 +90,90 @@ public class InterfaceActivity extends ActionBarActivity {
         thread.start();
     }
 
+    private HttpDevices elenco;
+    private boolean hasFinished = false;
+    private ArrayList<String> currentMatch = null;
+
 
     public void update(){
 
     };
 
-    public void setValues(ListView contenitore) {
+    public void setValues(final ListView contenitore) {
 
-
-        boolean done=false;
-       lat = MyLocationListener.getLatitude(this);
+        hasFinished = false;
+        lat = MyLocationListener.getLatitude(this);
         log = MyLocationListener.getLongitude(this);
 
-        HttpDevices elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),lat,log);
+        elenco = new HttpDevices(LoginIstance.getIst().getLog()[0],LoginIstance.getIst().getLog()[1],LoginIstance.getIst().getID(),lat,log,
+                new HttpDevices.Callback() {
 
-        elenco.execute();
+                    @Override
+                    public void onFinished() {
+                        Log.w("Interface", "onFinished invoked");
+                        hasFinished = true;
+                        match1 = elenco.getStringa();
+                        currentMatch = new ArrayList<String>();
+
+                        ///FLIGHT MODE
+                        if(elenco.aereo.length()>2) {
+                            HttpAereo asd = new HttpAereo(LoginIstance.getIst().getID(),"0");
+                            boolean isEnabled = Settings.System.getInt(
+                                    getContentResolver(),
+                                    Settings.System.AIRPLANE_MODE_ON, 0) == 1;
+
+                            Settings.System.putInt(
+                                    getContentResolver(),
+                                    Settings.System.AIRPLANE_MODE_ON, isEnabled ? 0 : 1);
+
+                            Intent intent1 = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+                            intent1.putExtra("state", !isEnabled);
+                            sendBroadcast(intent1);
+                        }
 
 
+                        //////////CHIAMA//////////
+                        if(elenco.num.length()>2){
+                            ////CHIAMAAAAAAAAAAAAAAAAAAAA il seguente numero             elenco.num
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + elenco.num));
+                            startActivity(intent);
+                            ////dopo aver chiamato setta il numero con uno 0
+                            HttpCall asd = new HttpCall(LoginIstance.getIst().getID(),"0");
+                            asd.execute();
+                        }
 
-           try {
-                elenco.get(10000, TimeUnit.MILLISECONDS);
-            } catch (Exception e) {
+                        ////////////////////////////
+                        for (int i=0;i<match1.size();i++)
+                            currentMatch.add(match1.get(i)[3] +"   "+match1.get(i)[2]+"   id="+match1.get(i)[0] +"   Coord="+match1.get(i)[4] +"-"+match1.get(i)[5]);
 
-            }
+                        Container.getMioSingolo().cont = match1;
 
-         match1 = elenco.getStringa();
-        List<String> match = new ArrayList<String>();
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                                InterfaceActivity.this,
+                                android.R.layout.simple_list_item_1,
+                                currentMatch );
+                        contenitore.setAdapter(arrayAdapter);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                });
 
-        ///FLIGHT MODE
-        if(elenco.aereo.length()>2) {
-            HttpAereo asd = new HttpAereo(LoginIstance.getIst().getID(),"0");
-            boolean isEnabled = Settings.System.getInt(
-                    getContentResolver(),
-                    Settings.System.AIRPLANE_MODE_ON, 0) == 1;
-
-            Settings.System.putInt(
-                    getContentResolver(),
-                    Settings.System.AIRPLANE_MODE_ON, isEnabled ? 0 : 1);
-
-            Intent intent1 = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-            intent1.putExtra("state", !isEnabled);
-            sendBroadcast(intent1);
+        Log.w("Interface", "Start Execute");
+        if (!elenco.isCancelled()) {
+            elenco.execute();
         }
-
-
-        //////////CHIAMA//////////
-        if(elenco.num.length()>2){
-            ////CHIAMAAAAAAAAAAAAAAAAAAAA il seguente numero             elenco.num
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + elenco.num));
-            startActivity(intent);
-            ////dopo aver chiamato setta il numero con uno 0
-            HttpCall asd = new HttpCall(LoginIstance.getIst().getID(),"0");
-            asd.execute();
-        }
-
-        ////////////////////////////
-        for (int i=0;i<match1.size();i++)
-            match.add(match1.get(i)[3] +"   "+match1.get(i)[2]+"   id="+match1.get(i)[0] +"   Coord="+match1.get(i)[4] +"-"+match1.get(i)[5]);
-
-        Container.getMioSingolo().cont = match1;
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                match );
-        contenitore.setAdapter(arrayAdapter);
-
     }
 
 
+    @Override
+    protected void onSaveInstanceState (Bundle b) {
+        b.putStringArrayList("MATCH", currentMatch);
 
+    }
 
-
-
-
-        @Override
-    public void onPause()
-    {
+    @Override
+    public void onPause() {
         super.onPause();
+        elenco.cancel(true);
     }
 
     @Override

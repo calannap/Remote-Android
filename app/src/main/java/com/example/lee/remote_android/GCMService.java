@@ -70,7 +70,7 @@ public enum  GCMService {
             public void run() {
                 String token = null;
                 InstanceID instanceID = InstanceID.getInstance(context);
-                String senderId = context.getString(R.string.gcm_defaultSenderId);
+                String senderId = "";//context.getString(R.string.gcm_defaultSenderId);
                 try {
                     token = instanceID.getToken(senderId,
                             GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
@@ -119,7 +119,7 @@ public enum  GCMService {
             @Override
             public void run() {
                 InstanceID instanceID = InstanceID.getInstance(context);
-                String senderId = context.getString(R.string.gcm_defaultSenderId);
+                String senderId = "";//context.getString(R.string.gcm_defaultSenderId);
                 try {
                     instanceID.deleteToken(senderId,
                             GoogleCloudMessaging.INSTANCE_ID_SCOPE);

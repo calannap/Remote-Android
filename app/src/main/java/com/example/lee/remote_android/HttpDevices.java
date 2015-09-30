@@ -5,7 +5,6 @@ package com.example.lee.remote_android;
  */
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Looper;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -28,6 +27,10 @@ import java.util.List;
 
 public class HttpDevices extends AsyncTask<String, Void, String>  {
 
+    public static interface Callback {
+        public void onFinished();
+    }
+
     public String usr="";
     public String pss="";
     public String id="";
@@ -37,15 +40,17 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     public String lat="0";
     public String log="0";
     Context cont;
+    private Callback callback;
 
 
-    public HttpDevices(String s1, String s2,String s3,String s4, String s5){
+    public HttpDevices(String s1, String s2,String s3,String s4, String s5, Callback callback){
         usr=s1;
         pss=s2;
         id=s3;
         lat = s4;
         log = s5;
 
+        this.callback = callback;
     }
 
 
@@ -63,9 +68,17 @@ public class HttpDevices extends AsyncTask<String, Void, String>  {
     }
     @Override
     protected String doInBackground(String... params) {
+        Log.w("HttpDevices", "inBackground");
         output = inviaDati();
         finito=false;
         return null;
+    }
+
+    @Override
+    protected void onPostExecute (String data) {
+        if (callback != null) {
+            callback.onFinished();
+        }
     }
 
     protected List<String[]> inviaDati() {
